@@ -47,26 +47,26 @@ func Records(w http.ResponseWriter, req *http.Request) {
 		log.Fatal(err)
 	}
 
-	for i := 3; i < len(cRecords); i++ {
-		u := cRecords[i]
+	// for i := 3; i < len(cRecords); i++ {
+	// 	u := cRecords[i]
 
-		data := map[string]interface{}{
-			"value":          u.Ssn,
-			"transformation": "ssn",
-		}
+	// 	data := map[string]interface{}{
+	// 		"value":          u.Ssn,
+	// 		"transformation": "ssn",
+	// 	}
 
-		response, err := config.Vclient.Logical().Write("transform/decode/vault_go_demo", data)
-		if err != nil {
-			log.Fatal(err)
-		}
-		decval := response.Data["decoded_value"].(string)
-		ssn := decval
+	// 	response, err := config.Vclient.Logical().Write("transform/decode/vault_go_demo", data)
+	// 	if err != nil {
+	// 		log.Fatal(err)
+	// 	}
+	// 	decval := response.Data["decoded_value"].(string)
+	// 	ssn := decval
 
-		if err != nil {
-			log.Fatal(err)
-		}
-		cRecords[i].Ssn = string(ssn)
-	}
+	// 	if err != nil {
+	// 		log.Fatal(err)
+	// 	}
+	// 	cRecords[i].Ssn = string(ssn)
+	// }
 
 	err = config.TPL.ExecuteTemplate(w, "records.gohtml", cRecords)
 	if err != nil {
@@ -119,18 +119,18 @@ func Addrecord(w http.ResponseWriter, req *http.Request) {
 			Salary:  conSlry,
 		}
 
-		data := map[string]interface{}{
-			"value":          u.Ssn,
-			"transformation": "ssn",
-		}
+		// data := map[string]interface{}{
+		// 	"value":          u.Ssn,
+		// 	"transformation": "ssn",
+		// }
 
-		response, err := config.Vclient.Logical().Write("transform/encode/vault_go_demo", data)
-		if err != nil {
-			log.Fatal(err)
-		}
-		encval := response.Data["encoded_value"].(string)
+		// response, err := config.Vclient.Logical().Write("transform/encode/vault_go_demo", data)
+		// if err != nil {
+		// 	log.Fatal(err)
+		// }
+		// encval := response.Data["encoded_value"].(string)
 
-		u.Ssn = encval
+		// u.Ssn = encval
 
 		_, err = config.DB.Exec("INSERT INTO vault_go_demo (FIRST, LAST, SSN, ADDR, BDAY, SALARY) VALUES ($1, $2, $3, $4, $5, $6)", u.First, u.Last, u.Ssn, u.Addr, u.Bday, u.Salary)
 		if err != nil {
@@ -174,18 +174,18 @@ func UpdateRecord(w http.ResponseWriter, req *http.Request) {
 			Salary:  conSlry,
 		}
 
-		data := map[string]interface{}{
-			"value":          u.Ssn,
-			"transformation": "ssn",
-		}
+		// data := map[string]interface{}{
+		// 	"value":          u.Ssn,
+		// 	"transformation": "ssn",
+		// }
 
-		response, err := config.Vclient.Logical().Write("transform/encode/vault_go_demo", data)
-		if err != nil {
-			log.Fatal(err)
-		}
-		encval := response.Data["encoded_value"].(string)
+		// response, err := config.Vclient.Logical().Write("transform/encode/vault_go_demo", data)
+		// if err != nil {
+		// 	log.Fatal(err)
+		// }
+		// encval := response.Data["encoded_value"].(string)
 
-		u.Ssn = encval
+		// u.Ssn = encval
 
 		convcn, err := strconv.Atoi(u.Cust_no)
 		if err != nil {
