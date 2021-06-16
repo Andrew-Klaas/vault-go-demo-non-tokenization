@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/Andrew-Klaas/vault-go-demo-tokenization/config"
+	"github.com/Andrew-Klaas/vault-go-demo-non-tokenization/config"
 )
 
 //Index ...
