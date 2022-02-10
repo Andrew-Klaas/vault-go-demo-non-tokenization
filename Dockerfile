@@ -1,12 +1,18 @@
+# syntax=docker/dockerfile:1
+
 # Start from a Debian image with the latest version of Go installed
 # and a workspace (GOPATH) configured at /go.
-FROM golang
-ADD . /go/src/github.com/Andrew-Klaas/vault-go-demo-non-tokenization
+FROM golang:1.16-alpine
 WORKDIR /go/src/github.com/Andrew-Klaas/vault-go-demo-non-tokenization
-RUN go get github.com/hashicorp/hcl
-RUN go get github.com/cenkalti/backoff
-RUN go get github.com/hashicorp/vault/api
-RUN go get github.com/lib/pq
+ADD . /go/src/github.com/Andrew-Klaas/vault-go-demo-non-tokenization
+
+COPY go.mod ./
+COPY go.sum ./
+RUN go mod download
+# RUN go get github.com/hashicorp/hcl
+# RUN go get github.com/cenkalti/backoff
+# RUN go get github.com/hashicorp/vault/api
+# RUN go get github.com/lib/pq
 RUN go get github.com/Andrew-Klaas/vault-go-demo-non-tokenization
 RUN go install /go/src/github.com/Andrew-Klaas/vault-go-demo-non-tokenization
 
