@@ -65,7 +65,7 @@ func init() {
 	}
 	username := data.Data["username"]
 	password := data.Data["password"]
-	SQLQuery := "postgres://" + username.(string) + ":" + password.(string) + "@pq-postgresql-headless.default.svc:5432/vault_go_demo?sslmode=disable"
+	SQLQuery := "postgres://" + username.(string) + ":" + password.(string) + "@pq-postgresql.default.svc.cluster.local:5432/vault_go_demo?sslmode=disable"
 
 	AppDBuser.Username = username.(string)
 	AppDBuser.Password = password.(string)
